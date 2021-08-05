@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.limit(params[:limit]).offset(params[:offset])
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -62,6 +62,10 @@ class TweetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
       @tweet = Tweet.find(params[:id])
+    end
+
+    def paginate_params
+      params.permit(:offset, :limit)
     end
 
     # Only allow a list of trusted parameters through.
