@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
 import Tweet from "./Tweet";
 
@@ -48,17 +48,14 @@ const Tweets = (props) => {
     page: 0,
   });
 
-  const [requestedTweets, setRequestedTweets] = useState(new Set());
-
   useEffect(() => {
     fetchTweets(state, dispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="col-md-6 offset-3">
       {state.tweets &&
-        state.tweets.map((tweet) => <div className="mb-3">{Tweet(tweet)}</div>)}
+        state.tweets.map((tweet) => <div key={tweet.id} className="mb-3">{Tweet(tweet)}</div>)}
       <div className="row">
         <button className="btn" onClick={() => fetchTweets(state, dispatch)}>
           Show More

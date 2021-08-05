@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root to: 'tweets#index'
 
   resources :users
-  resources :tweets
+  resources :tweets do
+    member do
+      put 'like'
+    end
+  end
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

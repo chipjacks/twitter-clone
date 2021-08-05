@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show edit update destroy ]
   before_action :logged_in_user
+  skip_before_action :verify_authenticity_token, only: [ :like ]
 
   # GET /tweets or /tweets.json
   def index
@@ -50,6 +51,15 @@ class TweetsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def like
+    respond_to do |format|
+      @tweet = Tweet.find(params[:id])
+      @tweet.likes += 1
+      @tweet.save!
+      format.json { render :show, status: :ok, location: @tweet }
     end
   end
 
