@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Tweet from "./Tweet";
 
 const API_URL = "/tweets.json";
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 
 function reducer(state, action) {
   switch (action.type) {
@@ -56,8 +56,9 @@ const Tweets = (props) => {
   }, []);
 
   return (
-    <div className="col">
-      {state.tweets && state.tweets.map(Tweet)}
+    <div className="col-md-6 offset-3">
+      {state.tweets &&
+        state.tweets.map((tweet) => <div className="mb-3">{Tweet(tweet)}</div>)}
       <div className="row">
         <button className="btn" onClick={() => fetchTweets(state, dispatch)}>
           Show More
