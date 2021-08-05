@@ -5,7 +5,7 @@ class TweetsController < ApplicationController
   # GET /tweets or /tweets.json
   def index
     @tweets = Tweet
-      .includes(:user, :retweet)
+      .includes(:user, retweet: [:user])
       .limit(params[:limit])
       .offset(params[:offset])
       .order(created_at: :desc)

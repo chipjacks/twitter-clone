@@ -7,7 +7,11 @@ const Tweet = (props) => {
       <div className="card-body">
         <h6 className="card-subtitle mb-2">{props.user.email}</h6>
         <p className="card-subtitle text-muted mb-2">{props.created_at}</p>
-        <p className="card-text"> {props.content} </p>
+        {props.retweet ? (
+          Tweet(props.retweet)
+        ) : (
+          <p className="card-text"> {props.content} </p>
+        )}
       </div>
     </div>
   );
@@ -20,6 +24,7 @@ Tweet.propTypes = {
   content: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
   user: PropTypes.object.isRequired,
+  retweet: PropTypes.object,
 };
 
 export default Tweet;

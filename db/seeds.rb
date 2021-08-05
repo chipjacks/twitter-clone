@@ -12,7 +12,7 @@ User.all.each { |u| u.destroy }
 
 luke = User.create(email: 'luke@gmail.com', password: 'password')
 julie = User.create(email: 'julie@outlook.com', password: 'password')
-ron = User.create(email: 'ron@trakstar.com', password: 'password')
+ron = User.create(email: 'ron@tacos.eat', password: 'password')
 
 100.times do |i|
   Tweet.create(user: luke, content: 'I tweet every day. Day ' ++ (100 - i).to_s, likes: 0, created_at: Date.today - i, updated_at: Date.today - i)
