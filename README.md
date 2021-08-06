@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Twitter Clone
 
-Things you may want to cover:
+* We can register and log in with different user accounts
 
-* Ruby version
+* We can write/post tweets
 
-* System dependencies
+* We can read all of the tweets on the site
 
-* Configuration
+* Ability to retweet (i.e. repost an existing tweet from another account)
 
-* Database creation
+* Ability to “like” a tweet, and display the number of likes on the tweet
 
-* Database initialization
 
-* How to run the test suite
+## Setup
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+bundle install
+rails db:seed
+```
 
-* Deployment instructions
 
-* ...
+## Run
+
+```
+rails server
+```
