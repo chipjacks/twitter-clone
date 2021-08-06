@@ -26,9 +26,15 @@ function reducer(state, action) {
     case "tweetUpdate":
       return {
         ...state,
-        tweets: state.tweets.map((t) =>
-          t.id === action.tweet.id ? action.tweet : t
-        ),
+        tweets: state.tweets.map((t) => {
+          if (t.id === action.tweet.id) {
+            return action.tweet;
+          } else if ((t.retweet && t.retweet.id) === action.tweet.id) {
+            return { ...t, retweet: action.tweet };
+          } else {
+            return t;
+          }
+        }),
       };
     default:
       console.log(action.type);
