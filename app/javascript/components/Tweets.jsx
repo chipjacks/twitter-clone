@@ -71,7 +71,7 @@ const Tweets = (props) => {
   }, []);
 
   return (
-    <div className="col-md-6 offset-3">
+    <div>
       {state.tweets &&
         state.tweets.map((tweet) => (
           <div key={tweet.id} className="mb-3">

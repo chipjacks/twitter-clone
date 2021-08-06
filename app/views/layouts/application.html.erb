@@ -16,14 +16,15 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <div class="container-fluid row justify-content-center">
+      <% if flash[:danger] %>
+        <div class="col-md-6 alert alert-secondary alert-dismissible fade show" role="alert">
+          <%= flash[:danger] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
 
-    <% if flash[:danger] %>
-      <div class="col-md-6 offset-3 alert alert-secondary alert-dismissible fade show" role="alert">
-        <%= flash[:danger] %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
-
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>
