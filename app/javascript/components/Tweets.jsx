@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
 import Tweet from "./Tweet";
+import NewTweet from "./NewTweet";
 
 const API_URL = "/tweets.json";
 const PAGE_SIZE = 10;
@@ -72,6 +73,9 @@ const Tweets = (props) => {
 
   return (
     <div>
+      <NewTweet
+        handleCreate={(t) => dispatch({ type: "tweetCreate", tweet: t })}
+      />
       {state.tweets &&
         state.tweets.map((tweet) => (
           <div key={tweet.id} className="mb-3">

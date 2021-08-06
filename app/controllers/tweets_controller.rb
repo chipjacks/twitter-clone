@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show edit update destroy ]
   before_action :logged_in_user
-  skip_before_action :verify_authenticity_token, only: [ :like, :retweet ]
+  skip_before_action :verify_authenticity_token, only: [ :like, :retweet, :create ]
 
   # GET /tweets or /tweets.json
   def index
@@ -29,6 +29,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
+    @tweet.likes ||= 0
 
     respond_to do |format|
       if @tweet.save
