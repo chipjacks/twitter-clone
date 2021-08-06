@@ -10,8 +10,8 @@
 Tweet.all.each { |u| u.destroy }
 User.all.each { |u| u.destroy }
 
-luke = User.create(email: 'luke@gmail.com', password: 'password')
-julie = User.create(email: 'julie@outlook.com', password: 'password')
+luke = User.create(email: 'luke@burritos.com', password: 'password')
+julie = User.create(email: 'julie@tamale.net', password: 'password')
 ron = User.create(email: 'ron@tacos.eat', password: 'password')
 
 100.times do |i|
