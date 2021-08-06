@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-async function handleLike(id) {
+async function handleLike(id, callback) {
   const response = await fetch(`/tweets/${id}/like`, { method: "PUT" });
-  return response.json();
+  callback(await response.json());
 }
 
 function Tweet(props) {
@@ -13,14 +13,18 @@ function Tweet(props) {
         <h6 className="card-subtitle mb-2">{props.user.email}</h6>
         <p className="card-subtitle text-muted mb-2">{props.created_at}</p>
         {props.retweet ? (
-          Tweet({ ...props.retweet, isRetweet: true })
+          Tweet({
+            ...props.retweet,
+            handleUpdate: props.handleUpdate,
+            isRetweet: true,
+          })
         ) : (
           <p className="card-text"> {props.content} </p>
         )}
         <button
-          className="btn"
+          className="btn btn-outline-primary btn-sm"
           onClick={() => {
-            handleLike(props.id);
+            handleLike(props.id, props.handleUpdate);
           }}
         >
           Likes {props.likes}
@@ -35,10 +39,11 @@ Tweet.defaultProps = {};
 Tweet.propTypes = {
   id: PropTypes.number.isRequired,
   isRetweet: PropTypes.bool,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
   likes: PropTypes.number.isRequired,
   user: PropTypes.object.isRequired,
   retweet: PropTypes.object,
+  handleUpdate: PropTypes.func.isRequired,
 };
 
 export default Tweet;

@@ -18,6 +18,13 @@ function reducer(state, action) {
       };
     case "fetchError":
       return { ...state, loading: false, error: true };
+    case "tweetUpdate":
+      return {
+        ...state,
+        tweets: state.tweets.map((t) =>
+          t.id === action.tweet.id ? action.tweet : t
+        ),
+      };
     default:
       console.log(action.type);
       throw new Error();
@@ -55,7 +62,14 @@ const Tweets = (props) => {
   return (
     <div className="col-md-6 offset-3">
       {state.tweets &&
-        state.tweets.map((tweet) => <div key={tweet.id} className="mb-3">{Tweet(tweet)}</div>)}
+        state.tweets.map((tweet) => (
+          <div key={tweet.id} className="mb-3">
+            <Tweet
+              {...tweet}
+              handleUpdate={(t) => dispatch({ type: "tweetUpdate", tweet: t })}
+            />
+          </div>
+        ))}
       <div className="row">
         <button className="btn" onClick={() => fetchTweets(state, dispatch)}>
           Show More
