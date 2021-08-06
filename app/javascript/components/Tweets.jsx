@@ -18,6 +18,11 @@ function reducer(state, action) {
       };
     case "fetchError":
       return { ...state, loading: false, error: true };
+    case "tweetCreate":
+      return {
+        ...state,
+        tweets: [action.tweet, ...state.tweets],
+      };
     case "tweetUpdate":
       return {
         ...state,
@@ -67,6 +72,7 @@ const Tweets = (props) => {
             <Tweet
               {...tweet}
               handleUpdate={(t) => dispatch({ type: "tweetUpdate", tweet: t })}
+              handleCreate={(t) => dispatch({ type: "tweetCreate", tweet: t })}
             />
           </div>
         ))}

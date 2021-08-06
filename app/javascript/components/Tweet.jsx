@@ -6,6 +6,11 @@ async function handleLike(id, callback) {
   callback(await response.json());
 }
 
+async function handleRetweet(id, callback) {
+  const response = await fetch(`/tweets/${id}/retweet`, { method: "POST" });
+  callback(await response.json());
+}
+
 function Tweet(props) {
   return (
     <div className="card">
@@ -16,6 +21,7 @@ function Tweet(props) {
           Tweet({
             ...props.retweet,
             handleUpdate: props.handleUpdate,
+            handleCreate: props.handleCreate,
             isRetweet: true,
           })
         ) : (
@@ -27,8 +33,18 @@ function Tweet(props) {
             handleLike(props.id, props.handleUpdate);
           }}
         >
-          Likes {props.likes}
+          Like {props.likes}
         </button>
+        {!props.retweet && (
+          <button
+            className="btn btn-outline-primary btn-sm"
+            onClick={() => {
+              handleRetweet(props.id, props.handleCreate);
+            }}
+          >
+            Retweet
+          </button>
+        )}
       </div>
     </div>
   );
@@ -44,6 +60,7 @@ Tweet.propTypes = {
   user: PropTypes.object.isRequired,
   retweet: PropTypes.object,
   handleUpdate: PropTypes.func.isRequired,
+  handleCreate: PropTypes.func.isRequired,
 };
 
 export default Tweet;

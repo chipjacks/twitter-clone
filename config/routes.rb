@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :tweets do
     member do
       put 'like'
+      post 'retweet'
     end
   end
 
