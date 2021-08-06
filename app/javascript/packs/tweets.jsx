@@ -6,3 +6,7 @@ import Tweets from "../components/Tweets";
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Tweets />, document.getElementById("main"));
 });
+
+document.addEventListener("turbolinks:load", () => {
+  ReactDOM.render(<Tweets />, document.getElementById("main"));
+});
